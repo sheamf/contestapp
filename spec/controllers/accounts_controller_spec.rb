@@ -24,7 +24,12 @@ RSpec.describe AccountsController, :type => :controller do
   # Account. As you add validations to Account, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    # skip("Add a hash of attributes valid for your model")
+    { shopify_account_url:   "a_url",
+      shopify_password:      "a_password",
+      shopify_api_key:       "an_api_key", 
+      shopify_shared_secret: "a_shared_secret_..._how_precious" 
+    }
   }
 
   let(:invalid_attributes) {
