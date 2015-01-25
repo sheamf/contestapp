@@ -41,11 +41,21 @@ RSpec.describe AccountsController, :type => :controller do
   # AccountsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  # describe "GET index" do
+  #   it "assigns all accounts as @accounts" do
+  #     account = Account.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     puts "################################################", account
+  #     puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", assigns(:accounts)
+  #     expect(assigns(:accounts)).to eq([account])
+  #   end
+  # end
+
   describe "GET index" do
     it "assigns all accounts as @accounts" do
       account = Account.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:accounts)).to eq([account])
+      assigns(:accounts).should eq([account])
     end
   end
 
