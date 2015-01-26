@@ -1,4 +1,9 @@
 Rails.application.configure do
+
+  SHOPIFY_API_KEY = "123abc" 
+  SHOPIFY_SHARED_SECRET = "test-secret" 
+  DOMAIN = "http://localhost:3000"
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
