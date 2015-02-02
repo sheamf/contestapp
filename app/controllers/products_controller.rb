@@ -2,13 +2,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def import
-    account = Account.first #needs to change
-
     # instantiate the shopify integration class
-    shopify_integration = ShopifyIntegration.new(api_key: account.shopify_api_key,
-                                                 shared_secret: account.shopify_shared_secret,
-                                                 url: account.shopify_account_url,
-                                                 password: account.shopify_password)
+    shopify_integration = ShopifyIntegration.new(api_key: current_account.shopify_api_key,
+                                                 shared_secret: current_account.shopify_shared_secret,
+                                                 url: current_account.shopify_account_url,
+                                                 password: current_account.shopify_password)
 
     respond_to do |format|
       if shopify_integration.connect
@@ -22,30 +20,22 @@ class ProductsController < ApplicationController
     end
   end
 
-  # GET /products
-  # GET /products.json
   def index
-    @products = Product.all
+    @products = current_account.products.all
   end
 
-  # GET /products/1
-  # GET /products/1.json
   def show
   end
 
-  # GET /products/new
   def new
-    @product = Product.new
+    @product = current_account.products.new
   end
 
-  # GET /products/1/edit
   def edit
   end
 
-  # POST /products
-  # POST /products.json
   def create
-    @product = Product.new(product_params)
+    @product = current_account.products.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -58,8 +48,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
       if @product.update(product_params)
@@ -72,8 +60,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.json
   def destroy
     @product.destroy
     respond_to do |format|
@@ -85,7 +71,7 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = current_account.products.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
