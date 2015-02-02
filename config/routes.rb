@@ -28,6 +28,12 @@ Rails.application.routes.draw do
   root 'dashboard#index'
   post 'create_contest', to: 'dashboard#create_contest'
 
+  # Shopify routes 
+  get 'shopify/authorize' => 'shopify#authorize' 
+  post 'shopify/authorize' => 'shopify#authorize' 
+  get 'shopify/install' => 'shopify#install' 
+  post 'shopify/install' => 'shopify#install'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

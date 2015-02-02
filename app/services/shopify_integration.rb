@@ -43,8 +43,6 @@ class ShopifyIntegration
     account.email = shop.email
 
     account.save
-
-
   end
 
   def import_orders
