@@ -3,10 +3,9 @@ class ProductsController < ApplicationController
 
   def import
     # instantiate the shopify integration class
-    shopify_integration = ShopifyIntegration.new(api_key: current_account.shopify_api_key,
-                                                 shared_secret: current_account.shopify_shared_secret,
-                                                 url: current_account.shopify_account_url,
-                                                 password: current_account.shopify_password)
+    shopify_integration = ShopifyIntegration.new(url: current_account.shopify_account_url,
+                                                 password: current_account.shopify_password,
+                                                 account_id: current_account.id)
 
     respond_to do |format|
       if shopify_integration.connect
