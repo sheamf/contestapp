@@ -1,7 +1,7 @@
 Rails.application.configure do
 
-  SHOPIFY_API_KEY = "24d45c03b45c5e49ed1c6b6082dbceea" 
-  SHOPIFY_SHARED_SECRET = "716245d1e54f422a5941e7f8e8261c25" 
+  SHOPIFY_API_KEY = "7532090ee579d4d106c4d306cf2175cd" 
+  SHOPIFY_SHARED_SECRET = "a7132098fc1bb96e9dc99880e8fabbb3" 
   DOMAIN = "http://localhost:3000"
 
   # Settings specified here will take precedence over those in config/application.rb.
