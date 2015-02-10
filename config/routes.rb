@@ -1,9 +1,19 @@
-Rails.application.routes.draw do
-  get 'sessions/new'
+Contestapp::Application.routes.draw do
 
-  post 'sessions/create'
+  # Webhook routes
+  get "webhooks/uninstall"
+  post "webhooks/uninstall"
 
-  get 'sessions/destroy'
+  get "sessions/new"
+  post "sessions/create"
+  get "sessions/destroy"
+
+  resources :products do
+    collection do
+      get 'import'
+    end
+    resources :variants
+  end
 
   resources :orders do
     collection do
@@ -11,34 +21,23 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :accounts do 
-    member do 
-      get 'test_connection'
-    end
-  end
+  resources :contests
 
-  resources :products do
-    collection do 
-      get 'import'
-    end
-    resources :variants
-  end 
+  # Dashboard routes
+  get "dashboard/index"
+  post "create_contest" => 'dashboard#create_contest'
+  get "test_connection" => 'dashboard#test_connection'
 
-  get 'dashboard/index'
-  root 'dashboard#index'
-  post 'create_contest', to: 'dashboard#create_contest'
+  # Shopify routes
+  get 'shopify/authorize' => 'shopify#authorize'
+  post 'shopify/authorize' => 'shopify#authorize'
 
-  # Shopify routes 
-  get 'shopify/authorize' => 'shopify#authorize' 
-  post 'shopify/authorize' => 'shopify#authorize' 
-  get 'shopify/install' => 'shopify#install' 
+  get 'shopify/install' => 'shopify#install'
   post 'shopify/install' => 'shopify#install'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'dashboard#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

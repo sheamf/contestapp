@@ -207,23 +207,18 @@ class ShopifyIntegration
 
   # This method is used to verify Shopify requests / redirects
   def self.verify(params)
-
-    hash = params.slice(:code, :shop, :signature, :timestamp)
-
+    hash = params.slice(:code, :hmac, :shop, :signature, :timestamp)
     received_signature = hash.delete(:signature)
-
     # Collect the URL parameters into an array of elements of the format "#{parameter_name}=#{parameter_value}"
     calculated_signature = hash.collect { |k, v| "#{k}=#{v}" } # => ["shop=some-shop.myshopify.com", "timestamp=1337178173", "code=a94a110d86d2452eb3e2af4cfb8a3828"]
-
+# staahhhp  
     # Sort the key/value pairs in the array
     calculated_signature = calculated_signature.sort # => ["code=25e725143c2faf592f454f2949c8e4e2", "shop=some-shop.myshopify.com", "timestamp=1337178173
-
     # Join the array elements into a string
     calculated_signature = calculated_signature.join # => "code=a94a110d86d2452eb3e2af4cfb8a3828shop=some-shop.myshopify.comtimestamp=1337178173"
-
     # Final calculated_signature to compare against
     calculated_signature = Digest::MD5.hexdigest(SHOPIFY_SHARED_SECRET + calculated_signature) # => "25e725143c2faf592f454f2949c8e4e2"
-
+# staahhhp
     return calculated_signature == received_signature
   end
 

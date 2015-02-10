@@ -9,6 +9,7 @@ class WebhookService
 
   # This method is provided by Shopify on their Wiki
   def verify_webhook
+
     # TODO: disable this after launch
     return true if @request.headers['HTTP_X_SHOPIFY_TEST'].to_s == "true"
 
@@ -34,6 +35,7 @@ class WebhookService
   end
 
   def process_uninstall
+
     # This is a simple one.
     # Due to dependencies, ActiveRecord will automatically remove the related Orders, Products, and Contests
     return @account.destroy
